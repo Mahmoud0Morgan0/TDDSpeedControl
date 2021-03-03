@@ -15,6 +15,10 @@ int MotorSpy_getMotorAngle()
 {
 	return motorAngle;
 }
+void MotorSpy_setMotorAngle(int angle)
+{
+	 motorAngle= angle;
+}
 void Motor_incAngle()
 {
 	motorAngle++;

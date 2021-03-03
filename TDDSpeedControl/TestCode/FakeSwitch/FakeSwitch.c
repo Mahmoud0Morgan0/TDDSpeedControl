@@ -8,12 +8,21 @@
 static SW_State_t positiveState;
 static SW_State_t negativeState;
 static SW_State_t pState;
-
+static int pSW_period;
 void FakeSw_init(void)
 {
 	positiveState = SW_RELEASED;
 	negativeState= SW_RELEASED;
 	pState= SW_RELEASED;
+	pSW_period=0;
+}
+int FakeSw_pSw_getPeriod(void)
+{
+	return pSW_period;
+}
+void FakeSw_pSw_setPeriod(int period)
+{
+	pSW_period=period;
 }
 SW_State_t FakeSw_Positive_getState(void)
 {

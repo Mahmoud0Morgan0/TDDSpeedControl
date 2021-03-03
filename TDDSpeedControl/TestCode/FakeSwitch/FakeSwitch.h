@@ -17,6 +17,8 @@ SW_State_t FakeSw_Positive_getState(void);
 SW_State_t FakeSw_Negative_getState(void);
 SW_State_t FakeSw_P_getState(void);
 
+int FakeSw_pSw_getPeriod(void);
+void FakeSw_pSw_setPeriod(int period);
 void FakeSw_Positive_setState(SW_State_t state);
 void FakeSw_Negative_setState(SW_State_t state);
 void FakeSw_P_setState(SW_State_t state);

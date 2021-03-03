@@ -12,4 +12,5 @@ int MotorSpy_getMotorAngle(void);
 void Motor_init(void);
 void Motor_decAngle(void);
 void Motor_incAngle(void);
+void MotorSpy_setMotorAngle(int angle);
 #endif /* TESTCODE_MOTORSPY_MOTORSPY_H_ */
