@@ -1,16 +1,14 @@
-/*
- * FakeSwitch.h
- *
- *  Created on: Mar 2, 2021
- *      Author: IT
- */
+
 
 #ifndef TESTCODE_FAKESWITCH_FAKESWITCH_H_
 #define TESTCODE_FAKESWITCH_FAKESWITCH_H_
-
+/** \brief Enumerate the states of switches*/
 typedef enum
 {
-	SW_PREPRESSED,SW_PRESSED,SW_PRERELEASED, SW_RELEASED
+	SW_PREPRESSED,		/**< The switch is in prepressed state */
+	SW_PRESSED,			/**< The switch is in pressed state */
+	SW_PRERELEASED,		/**< The switch is in prereleased state */
+	SW_RELEASED			/**< The switch is in released state */
 }SW_State_t;
 void FakeSw_init(void);
 SW_State_t FakeSw_Positive_getState(void);

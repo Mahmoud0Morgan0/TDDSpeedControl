@@ -1,8 +1,12 @@
-/*
- * test_SpeedControl.c
+/**
+ * @file test_SpeedControl.c
+ * @author Mahmoud Morgan
+ * @brief tests for speed control module
+ * @version 0.1
+ * @date 2021-03-05
  *
- *  Created on: Mar 1, 2021
- *      Author: IT
+ * @copyright Copyright (c) 2021
+ *
  */
 #include "../MotorSpy/MotorSpy.h"
 #include "../unity/unity.h"
@@ -11,11 +15,30 @@
 #include "stdio.h"
 #include "stdlib.h"
 
+/**
+ * @brief  Defines the State for +ve switch
+ *
+ */
 SW_State_t posistiveSw;
+/**
+ * @brief Defines the State for -ve switch
+ *
+ */
 SW_State_t negativeSw;
+/**
+ * @brief Defines the State for p switch
+ *
+ */
 SW_State_t pSW;
+/**
+ * @brief Defines the period for p switch
+ *
+ */
 int pSWperiod;
-
+/**
+ * @brief Defines the File where motor angles will be written
+ *
+ */
 FILE *motor;
 void setUp(void)
 {
@@ -29,7 +52,12 @@ void tearDown(void)
 {
 
 }
-
+/**
+ * @brief write motor angle to motor.txt file
+ *
+ * @param expected the expected result for test case
+ * @param result the actual value of motor angle
+ */
 void writeAngleToFile(int expected,int result)
 {
 
@@ -41,6 +69,15 @@ void writeAngleToFile(int expected,int result)
 	fprintf(motor, "%d \t\t%d\n", expected,result);
 
 }
+/**
+ * @brief collect test data from switches.txt file
+ *
+ * @param posistiveSw state of +ve switch
+ * @param negativeSw state of -ve switch
+ * @param pSW state of p switch
+ * @param pSWperiod period of p switch
+ * @param testNum number of test case
+ */
 void fetchData(SW_State_t *posistiveSw,SW_State_t *negativeSw,SW_State_t *pSW,int *pSWperiod,int testNum)
 {
 	int i = 0;
@@ -103,6 +140,10 @@ void fetchData(SW_State_t *posistiveSw,SW_State_t *negativeSw,SW_State_t *pSW,in
 	*pSWperiod=period;
 
 }
+/**
+ * @brief test that the speed is medium after init
+ *
+ */
 void test_SpeedIsMediuimAfterInit()
 {
 	/*!
@@ -114,7 +155,10 @@ void test_SpeedIsMediuimAfterInit()
 	TEST_ASSERT_EQUAL_INT(MEDIUM,SpeedControl_getSpeed());
 	writeAngleToFile(90,MotorSpy_getMotorAngle());
 }
-
+/**
+ * @brief test that the motor angle is 90 after init
+ *
+ */
 void test_MotorAngel90AfterInit()
 {
 	/*!
@@ -126,7 +170,10 @@ void test_MotorAngel90AfterInit()
 	TEST_ASSERT_EQUAL_INT(90,MotorSpy_getMotorAngle());
 	writeAngleToFile(90,MotorSpy_getMotorAngle());
 }
-
+/**
+ * @brief test that if positive sw is prepressed motor angle is decremented
+ *
+ */
 void test_PositiveSWDecrementMotorAngle()
 {
 	/*!
@@ -141,7 +188,10 @@ void test_PositiveSWDecrementMotorAngle()
 	TEST_ASSERT_EQUAL_INT(89,MotorSpy_getMotorAngle());
 
 }
-
+/**
+ * @brief tests that if negative switch is prepressed motor angle is incremented
+ *
+ */
 void test_NegativeSWIncrementMotorAngle()
 {
 	/*!
@@ -156,7 +206,10 @@ void test_NegativeSWIncrementMotorAngle()
 	TEST_ASSERT_EQUAL_INT(91,MotorSpy_getMotorAngle());
 
 }
-
+/**
+ * @brief test that if p switch is pressed for 30 seconds , motor angle is incremented
+ *
+ */
 void test_pSWD_30_incrementMotorAngle()
 {
 	/*!
@@ -171,7 +224,10 @@ void test_pSWD_30_incrementMotorAngle()
 	writeAngleToFile(91,MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(91,MotorSpy_getMotorAngle());
 }
-
+/**
+ * @brief tests that if the p switch is pressed for less than 30 seconds , motor angles are not changed
+ *
+ */
 void test_pSWD_Less30_doNothing()
 {
 	/*!
@@ -187,7 +243,10 @@ void test_pSWD_Less30_doNothing()
 	TEST_ASSERT_EQUAL_INT(90,MotorSpy_getMotorAngle());
 
 }
-
+/**
+ * @brief test that if p pressed for more than 30 second , motor angles is incremented
+ *
+ */
 void test_pSWD_More30_incrementMotorAngle()
 {
 	/*!
@@ -202,7 +261,10 @@ void test_pSWD_More30_incrementMotorAngle()
 	writeAngleToFile(91,MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(91,MotorSpy_getMotorAngle());
 }
-
+/**
+ * @brief test that if motor angle is 10 then it's max speed
+ *
+ */
 void test_Map_10_MotorAnglesTo_MaxSpeed()
 {
 	/*!
@@ -217,7 +279,10 @@ void test_Map_10_MotorAnglesTo_MaxSpeed()
 	TEST_ASSERT_EQUAL_INT(MAXIMUM,SpeedControl_getSpeed());
 
 }
-
+/**
+ * @brief test that if motor angle is 90 then it's med speed
+ *
+ */
 void test_Map_90_MotorAnglesTo_MedSpeed()
 {
 	/*!
@@ -233,7 +298,10 @@ void test_Map_90_MotorAnglesTo_MedSpeed()
 	TEST_ASSERT_EQUAL_INT(MEDIUM,SpeedControl_getSpeed());
 
 }
-
+/**
+ * @brief test that if motor angle is 140 then it's min speed
+ *
+ */
 void test_Map_140_MotorAnglesTo_MinSpeed()
 {
 	/*!
@@ -249,6 +317,10 @@ void test_Map_140_MotorAnglesTo_MinSpeed()
 	TEST_ASSERT_EQUAL_INT(MINIMUM,SpeedControl_getSpeed());
 
 }
+/**
+ * @brief test that if it's max speed and positive switch is prepressed the motor angles is not decremented
+ *
+ */
 void test_MAXSPEED_PositiveSWdoesNotDecrementMotorAngle()
 {
 	/*!
@@ -264,7 +336,10 @@ void test_MAXSPEED_PositiveSWdoesNotDecrementMotorAngle()
 	TEST_ASSERT_EQUAL_INT(10,MotorSpy_getMotorAngle());
 
 }
-
+/**
+ * @brief test that if it's min speed and negative sw is prepressed , motor angles is not incremented
+ *
+ */
 void test_MinSPEED_NegativeSWdoesNotIncrementMotorAngle()
 {
 	/*!
@@ -280,7 +355,10 @@ void test_MinSPEED_NegativeSWdoesNotIncrementMotorAngle()
 	TEST_ASSERT_EQUAL_INT(140,MotorSpy_getMotorAngle());
 
 }
-
+/**
+ * @brief test that p switch is the highest priority
+ *
+ */
 void test_Priority_pSW_NegativeSw_PositiveSw_PswProcess()
 {
 	/*!
@@ -298,7 +376,10 @@ void test_Priority_pSW_NegativeSw_PositiveSw_PswProcess()
 	TEST_ASSERT_EQUAL_INT(90,MotorSpy_getMotorAngle());
 
 }
-
+/**
+ * @brief tests that -ve switch is higher priority than +ve switch
+ *
+ */
 void test_Priority_NegativeSw_PositiveSw_NegativeswProcess()
 {
 	/*!
@@ -317,8 +398,9 @@ void test_Priority_NegativeSw_PositiveSw_NegativeswProcess()
 
 
 
-/*
- * Run the tests
+/**
+ * @brief Runner that collect test cases to be run in main
+ *
  */
 void test_SpeedContorlRunner()
 {
@@ -337,7 +419,11 @@ void test_SpeedContorlRunner()
 	RUN_TEST(test_Priority_pSW_NegativeSw_PositiveSw_PswProcess);
 	RUN_TEST(test_Priority_NegativeSw_PositiveSw_NegativeswProcess);
 }
-
+/**
+ * @brief the entry point of project
+ *
+ * @return int 0 if code run correctly
+ */
 int main(void)
 {
 	UNITY_BEGIN();

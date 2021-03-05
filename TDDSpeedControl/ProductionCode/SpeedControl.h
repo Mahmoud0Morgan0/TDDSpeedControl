@@ -1,9 +1,4 @@
-/*
- * SpeedControl.h
- *
- *  Created on: Mar 1, 2021
- *      Author: IT
- */
+
 
 #ifndef PRODUCTIONCODE_SPEEDCONTROL_H_
 #define PRODUCTIONCODE_SPEEDCONTROL_H_
