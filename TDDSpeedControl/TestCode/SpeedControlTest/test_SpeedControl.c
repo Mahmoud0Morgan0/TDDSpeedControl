@@ -92,6 +92,7 @@ void fetchData(SW_State_t *posistiveSw,SW_State_t *negativeSw,SW_State_t *pSW,in
 	char neg_SW[20];
 	char p_SW[20];
 	int period = 0;
+	fscanf(fptr,"\n");
 	for (i = 0; i < testNum; i++) {
 		memset(pos_SW, 0, 20);
 		memset(neg_SW, 0, 20);

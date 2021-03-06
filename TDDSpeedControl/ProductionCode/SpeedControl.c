@@ -1,4 +1,3 @@
-
 /**
  * @file test_SpeedControl.c
  * @author Mahmoud Morgan
