@@ -191,7 +191,7 @@ void SpeedControl_update()
 		  }*/
 		Motor_incAngle();
 	}
-	else if(FakeSw_P_getState()==SW_PRESSED && FakeSw_pSw_getPeriod()>=30)
+	else if(FakeSw_P_getState()==SW_PRESSED && FakeSw_pSw_getPeriod()>=30 && speed !=MINIMUM)
 	{
 		Motor_incAngle();
 	}

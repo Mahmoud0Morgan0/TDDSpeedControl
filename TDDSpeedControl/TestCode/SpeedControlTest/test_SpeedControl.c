@@ -58,7 +58,7 @@ void tearDown(void)
  * @param expected the expected result for test case
  * @param result the actual value of motor angle
  */
-void writeAngleToFile(int expected,int result)
+void writeAngleToFile(int result)
 {
 
 	if (motor == NULL) {
@@ -66,7 +66,7 @@ void writeAngleToFile(int expected,int result)
 		// Program exits if file pointer returns NULL.
 		exit(1);
 	}
-	fprintf(motor, "%d \t\t%d\n", expected,result);
+	fprintf(motor, "%d\n",result);
 
 }
 /**
@@ -153,7 +153,7 @@ void test_SpeedIsMediuimAfterInit()
 		*/
 	SpeedControl_init();
 	TEST_ASSERT_EQUAL_INT(MEDIUM,SpeedControl_getSpeed());
-	writeAngleToFile(90,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
 }
 /**
  * @brief test that the motor angle is 90 after init
@@ -168,7 +168,7 @@ void test_MotorAngel90AfterInit()
 		*/
 	SpeedControl_init();
 	TEST_ASSERT_EQUAL_INT(90,MotorSpy_getMotorAngle());
-	writeAngleToFile(90,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
 }
 /**
  * @brief test that if positive sw is prepressed motor angle is decremented
@@ -184,7 +184,7 @@ void test_PositiveSWDecrementMotorAngle()
 	fetchData(&posistiveSw, &negativeSw, &pSW, &pSWperiod, 2);
 	FakeSw_Positive_setState(posistiveSw);
 	SpeedControl_update();
-	writeAngleToFile(89,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(89,MotorSpy_getMotorAngle());
 
 }
@@ -202,7 +202,7 @@ void test_NegativeSWIncrementMotorAngle()
 	fetchData(&posistiveSw, &negativeSw, &pSW, &pSWperiod, 3);
 	FakeSw_Negative_setState(negativeSw);
 	SpeedControl_update();
-	writeAngleToFile(91,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(91,MotorSpy_getMotorAngle());
 
 }
@@ -221,7 +221,7 @@ void test_pSWD_30_incrementMotorAngle()
 	FakeSw_P_setState(pSW);
 	FakeSw_pSw_setPeriod(pSWperiod);
 	SpeedControl_update();
-	writeAngleToFile(91,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(91,MotorSpy_getMotorAngle());
 }
 /**
@@ -239,7 +239,7 @@ void test_pSWD_Less30_doNothing()
 	FakeSw_P_setState(pSW);
 	FakeSw_pSw_setPeriod(pSWperiod);
 	SpeedControl_update();
-	writeAngleToFile(90,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(90,MotorSpy_getMotorAngle());
 
 }
@@ -258,7 +258,7 @@ void test_pSWD_More30_incrementMotorAngle()
 	FakeSw_P_setState(pSW);
 	FakeSw_pSw_setPeriod(pSWperiod);
 	SpeedControl_update();
-	writeAngleToFile(91,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(91,MotorSpy_getMotorAngle());
 }
 /**
@@ -275,7 +275,7 @@ void test_Map_10_MotorAnglesTo_MaxSpeed()
 	fetchData(&posistiveSw, &negativeSw, &pSW, &pSWperiod, 7);
 	MotorSpy_setMotorAngle(10);
 	SpeedControl_update();
-	writeAngleToFile(10,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(MAXIMUM,SpeedControl_getSpeed());
 
 }
@@ -294,7 +294,7 @@ void test_Map_90_MotorAnglesTo_MedSpeed()
 	SpeedControl_setSpeed(MAXIMUM);
 	MotorSpy_setMotorAngle(90);
 	SpeedControl_update();
-	writeAngleToFile(90,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(MEDIUM,SpeedControl_getSpeed());
 
 }
@@ -313,7 +313,7 @@ void test_Map_140_MotorAnglesTo_MinSpeed()
 	SpeedControl_setSpeed(MAXIMUM);
 	MotorSpy_setMotorAngle(140);
 	SpeedControl_update();
-	writeAngleToFile(140,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(MINIMUM,SpeedControl_getSpeed());
 
 }
@@ -332,7 +332,7 @@ void test_MAXSPEED_PositiveSWdoesNotDecrementMotorAngle()
 	FakeSw_Positive_setState(posistiveSw);
 	MotorSpy_setMotorAngle(10);
 	SpeedControl_update();
-	writeAngleToFile(10,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(10,MotorSpy_getMotorAngle());
 
 }
@@ -351,7 +351,27 @@ void test_MinSPEED_NegativeSWdoesNotIncrementMotorAngle()
 	FakeSw_Negative_setState(negativeSw);
 	MotorSpy_setMotorAngle(140);
 	SpeedControl_update();
-	writeAngleToFile(140,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
+	TEST_ASSERT_EQUAL_INT(140,MotorSpy_getMotorAngle());
+
+}
+/**
+ * @brief test that if it's min speed and p sw is pressed for 30 sec or more , motor angles is not incremented
+ *
+ */
+void test_MinSPEED_P_SWdoesNotIncrementMotorAngle()
+{
+	/*!
+			  * @par Given : Motor angle is 140 +ve Sw released
+			  * @par When  : -ve is prepressed and Speed is Min
+			  * @par Then  : MotorAngle is 140
+		*/
+	fetchData(&posistiveSw, &negativeSw, &pSW, &pSWperiod, 12);
+	FakeSw_P_setState(pSW);
+	FakeSw_pSw_setPeriod(pSWperiod);
+	MotorSpy_setMotorAngle(140);
+	SpeedControl_update();
+	writeAngleToFile(MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(140,MotorSpy_getMotorAngle());
 
 }
@@ -366,13 +386,13 @@ void test_Priority_pSW_NegativeSw_PositiveSw_PswProcess()
 			  * @par When  : pSw is pressed -veSw is prepressed +veSw is prepressed and period of p is less 30
 			  * @par Then  : MotorAngle is 90
 		*/
-	fetchData(&posistiveSw, &negativeSw, &pSW, &pSWperiod, 12);
+	fetchData(&posistiveSw, &negativeSw, &pSW, &pSWperiod, 13);
 	FakeSw_Negative_setState(negativeSw);
 	FakeSw_Positive_setState(posistiveSw);
 	FakeSw_P_setState(pSW);
 	FakeSw_pSw_setPeriod(pSWperiod);
 	SpeedControl_update();
-	writeAngleToFile(90,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(90,MotorSpy_getMotorAngle());
 
 }
@@ -387,11 +407,11 @@ void test_Priority_NegativeSw_PositiveSw_NegativeswProcess()
 			  * @par When  : pSw is pressed -veSw is prepressed +veSw is prepressed and period of p is less 30
 			  * @par Then  : MotorAngle is 90
 		*/
-	fetchData(&posistiveSw, &negativeSw, &pSW, &pSWperiod, 13);
+	fetchData(&posistiveSw, &negativeSw, &pSW, &pSWperiod, 14);
 	FakeSw_Negative_setState(negativeSw);
 	FakeSw_Positive_setState(posistiveSw);
 	SpeedControl_update();
-	writeAngleToFile(91,MotorSpy_getMotorAngle());
+	writeAngleToFile(MotorSpy_getMotorAngle());
 	TEST_ASSERT_EQUAL_INT(91,MotorSpy_getMotorAngle());
 
 }
@@ -416,6 +436,7 @@ void test_SpeedContorlRunner()
 	RUN_TEST(test_Map_140_MotorAnglesTo_MinSpeed);
 	RUN_TEST(test_MAXSPEED_PositiveSWdoesNotDecrementMotorAngle);
 	RUN_TEST(test_MinSPEED_NegativeSWdoesNotIncrementMotorAngle);
+	RUN_TEST(test_MinSPEED_P_SWdoesNotIncrementMotorAngle);
 	RUN_TEST(test_Priority_pSW_NegativeSw_PositiveSw_PswProcess);
 	RUN_TEST(test_Priority_NegativeSw_PositiveSw_NegativeswProcess);
 }
@@ -428,7 +449,7 @@ int main(void)
 {
 	UNITY_BEGIN();
 	motor = fopen("motor.txt", "w");
-	fprintf(motor,"Expected\t result\n");
+	fprintf(motor, "Motor Angle\n");
 	test_SpeedContorlRunner();
 	return UNITY_END();
 }
