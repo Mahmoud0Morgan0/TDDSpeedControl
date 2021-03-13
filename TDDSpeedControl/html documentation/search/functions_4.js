@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['teardown_898',['tearDown',['../test___speed_control_8c.html#a9909011e5fea0c018842eec4d93d0662',1,'tearDown(void):&#160;test_SpeedControl.c'],['../unity_8h.html#a9909011e5fea0c018842eec4d93d0662',1,'tearDown(void):&#160;test_SpeedControl.c']]],
+  ['test_5fmap_5f10_5fmotoranglesto_5fmaxspeed_899',['test_Map_10_MotorAnglesTo_MaxSpeed',['../test___speed_control_8c.html#aaa675351f740bbd95ec6375ab6fd82be',1,'test_SpeedControl.c']]],
+  ['test_5fmap_5f140_5fmotoranglesto_5fminspeed_900',['test_Map_140_MotorAnglesTo_MinSpeed',['../test___speed_control_8c.html#a1b904bd07d9911b998eefbd344fc08e0',1,'test_SpeedControl.c']]],
+  ['test_5fmap_5f90_5fmotoranglesto_5fmedspeed_901',['test_Map_90_MotorAnglesTo_MedSpeed',['../test___speed_control_8c.html#a2da7618dfa035ebf9a5b151c7a17af25',1,'test_SpeedControl.c']]],
+  ['test_5fmaxspeed_5fpositiveswdoesnotdecrementmotorangle_902',['test_MAXSPEED_PositiveSWdoesNotDecrementMotorAngle',['../test___speed_control_8c.html#a248b03c870c8c79a1203c0e137323314',1,'test_SpeedControl.c']]],
+  ['test_5fminspeed_5fnegativeswdoesnotincrementmotorangle_903',['test_MinSPEED_NegativeSWdoesNotIncrementMotorAngle',['../test___speed_control_8c.html#a11744bbbdf7796d01e59e8c70fea7c98',1,'test_SpeedControl.c']]],
+  ['test_5fminspeed_5fp_5fswdoesnotincrementmotorangle_904',['test_MinSPEED_P_SWdoesNotIncrementMotorAngle',['../test___speed_control_8c.html#aa6078ef56f86382000132986fbb98c58',1,'test_SpeedControl.c']]],
+  ['test_5fmotorangel90afterinit_905',['test_MotorAngel90AfterInit',['../test___speed_control_8c.html#ad005c6eb7e2cf4de63f95e9e103636b1',1,'test_SpeedControl.c']]],
+  ['test_5fnegativeswincrementmotorangle_906',['test_NegativeSWIncrementMotorAngle',['../test___speed_control_8c.html#a0aa9ce18ed01d73be19c00aef018eae7',1,'test_SpeedControl.c']]],
+  ['test_5fpositiveswdecrementmotorangle_907',['test_PositiveSWDecrementMotorAngle',['../test___speed_control_8c.html#aaf780ff5c299f8f1c1b750a1711ae951',1,'test_SpeedControl.c']]],
+  ['test_5fpriority_5fnegativesw_5fpositivesw_5fnegativeswprocess_908',['test_Priority_NegativeSw_PositiveSw_NegativeswProcess',['../test___speed_control_8c.html#acd0f74ef2ad4ffd9c9f8cf64bedd1d52',1,'test_SpeedControl.c']]],
+  ['test_5fpriority_5fpsw_5fnegativesw_5fpositivesw_5fpswprocess_909',['test_Priority_pSW_NegativeSw_PositiveSw_PswProcess',['../test___speed_control_8c.html#ae3da543aaefc877058b77ae50c57ff43',1,'test_SpeedControl.c']]],
+  ['test_5fpswd_5f30_5fincrementmotorangle_910',['test_pSWD_30_incrementMotorAngle',['../test___speed_control_8c.html#a07777ca49366cb3925f33edf749a5a16',1,'test_SpeedControl.c']]],
+  ['test_5fpswd_5fless30_5fdonothing_911',['test_pSWD_Less30_doNothing',['../test___speed_control_8c.html#a363b4ef69aeb58b0fd2f4db45736daad',1,'test_SpeedControl.c']]],
+  ['test_5fpswd_5fmore30_5fincrementmotorangle_912',['test_pSWD_More30_incrementMotorAngle',['../test___speed_control_8c.html#a13bbfbc12ade3e166ad081caedf6eec7',1,'test_SpeedControl.c']]],
+  ['test_5fspeedcontorlrunner_913',['test_SpeedContorlRunner',['../test___speed_control_8c.html#a630bace1a49753448b8b0e79ab4cbe7c',1,'test_SpeedControl.c']]],
+  ['test_5fspeedismediuimafterinit_914',['test_SpeedIsMediuimAfterInit',['../test___speed_control_8c.html#aa7fbd35a7e9af3a1e34c9c6129b4663c',1,'test_SpeedControl.c']]]
+];
